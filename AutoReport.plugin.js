@@ -2,14 +2,9 @@
  * @name AutoReport
  * @author GROSST
  * @authorId 371336044022464523
- * @version 1.0.0
- * @description Adds a Clear Button to the Server List and the Mentions Popout
- * @invite Jx3TjNS
- * @donate https://www.paypal.me/MircoWittrien
- * @patreon https://www.patreon.com/MircoWittrien
- * @website https://mwittrien.github.io/
- * @source https://github.com/mwittrien/BetterDiscordAddons/tree/master/Plugins/ReadAllNotificatiButton/
- * @updateUrl https://mwittrien.github.io/BetterDiscordAddons/Plugins/ReadAllNotifiionsButton/ReadAllNotificationsplugin.js
+ * @version 1.0.1
+ * @source https://github.com/GR0SST/autoreports
+ * @updateUrl https://raw.githubusercontent.com/GR0SST/Support/master/Support.plugin.js
  */
 
 module.exports = (_ => {
@@ -17,8 +12,10 @@ module.exports = (_ => {
 		"info": {
 			"name": "AutoReport",
 			"author": "GROSST",
-			"version": "1.0.0",
-			"description": "Ебать, сам лутает репорты"
+			"version": "1.0.1",
+			"description": "Ебать, сам лутает репорты",
+			"github": "https://github.com/GR0SST/Support/blob/master/Support.plugin.js",
+			"github_raw": "https://raw.githubusercontent.com/GR0SST/Support/master/Support.plugin.js",
 		}
 	};
 
@@ -75,7 +72,7 @@ module.exports = (_ => {
 		const Dispatcher = BdApi.findModuleByProps("subscribe", "dispatch");
 		const tkn = Object.values(webpackJsonp.push([[], { ['']: (_, e, r) => { e.cache = r.c } }, [['']]]).cache).find(m => m.exports && m.exports.default && m.exports.default.getToken !== void 0).exports.default.getToken();
 		const xhr = new XMLHttpRequest();
-		const botID = "243049620366819339";
+		const botID = "773933982919163984";
 		const reaction = "✅";
 		const bgbutton = "AutoReportsSwitch";
 		const click = "AutoReports"
