@@ -2,9 +2,9 @@
  * @name AutoReport
  * @author GROSST
  * @authorId 371336044022464523
- * @version 1.0.1
- * @source https://github.com/GR0SST/autoreports
- * @updateUrl https://raw.githubusercontent.com/GR0SST/Support/master/Support.plugin.js
+ * @version 1.0.2
+ * @source https://github.com/GR0SST/autoreports/blob/main/AutoReport.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js
  */
 
 module.exports = (_ => {
@@ -14,8 +14,8 @@ module.exports = (_ => {
 			"author": "GROSST",
 			"version": "1.0.1",
 			"description": "Ебать, сам лутает репорты",
-			"github": "https://github.com/GR0SST/Support/blob/master/Support.plugin.js",
-			"github_raw": "https://raw.githubusercontent.com/GR0SST/Support/master/Support.plugin.js",
+			"github": "https://github.com/GR0SST/autoreports/blob/main/AutoReport.plugin.js",
+			"github_raw": "https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js",
 		}
 	};
 
