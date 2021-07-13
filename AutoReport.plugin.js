@@ -12,7 +12,7 @@ module.exports = (_ => {
 		"info": {
 			"name": "AutoReport",
 			"author": "GROSST",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Ебать, сам лутает репорты",
 			"github": "https://github.com/GR0SST/autoreports/blob/main/AutoReport.plugin.js",
 			"github_raw": "https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js",
