@@ -1,3 +1,6 @@
+let buttonName = "start"
+const bgbutton = "AutoReportsSwitch";
+let color = "#36393f" // "" 
 class AutoReportButton extends BdApi.React.Component {
     click() {
         let button = document.getElementById(bgbutton)
