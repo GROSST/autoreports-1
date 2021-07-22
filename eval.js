@@ -4,4 +4,4 @@ class User{
     v(){ console.log("v");}
 } 
 
-modue.exports = User
+module.exports = User
