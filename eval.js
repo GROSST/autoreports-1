@@ -1,4 +1,4 @@
-class AutoReportButton extends BdApi.React.Component {
+AutoReportComponent = class AutoReportButton extends BdApi.React.Component {
     click() {
         let button = document.getElementById(bgbutton)
         if (state === false) {
