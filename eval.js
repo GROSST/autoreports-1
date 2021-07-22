@@ -4,6 +4,4 @@ class User{
     v(){ console.log("v");}
 } 
 
-modue.exports = (botID,reactions)=>{ 
-
-}
+modue.exports = User
